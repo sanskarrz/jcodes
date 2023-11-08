@@ -1,0 +1,692 @@
+import java.awt.*;
+import java.awt.event.*;
+class KeyListener_Example extends WindowAdapter implements KeyListener
+{
+Label l;
+TextArea a;
+Frame f;
+KeyListener_Example()
+{
+f=new Frame();
+f.setSize(400,400);
+f.setVisible(true);
+f.setLayout(null);
+f.setTitle("KeyListener_Example");
+init();
+add_component();
+}
+public void init()
+{
+l=new Label();
+a=new TextArea();
+}
+public void add_component()
+{
+l.setBounds (20, 50, 100, 20);
+f.add(l);
+a.setBounds (20, 80, 300, 300);
+f.add(a);
+f.addWindowListener(this);
+a.addKeyListener(this);
+}
+ public void windowClosing(WindowEvent e)
+ {
+ f.dispose();
+ }
+
+ public void keyPressed(KeyEvent e)
+ {
+ l.setText("KeyPressed");
+ }
+ public void keyReleased(KeyEvent e){
+ l.setText("KeyReleased");
+ }
+ public void keyTyped(KeyEvent e)
+ {
+ l.setText("KeyTyped");
+ }
+ public static void main(String[] args)
+{
+new KeyListener_Example();
+}
+}
+public class DemoOne {
+ public static void main(String[] args)
+{
+new KeyListener_Example();
+}
+
+package Test;
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.TextField;
+import java.awt.event.*;
+class Mouse_Listener extends WindowAdapter implements MouseListener, ActionListener {
+Frame f;
+TextField tf;
+Button b;
+ Mouse_Listener()
+ {
+ f= new Frame();
+ f.setSize(300,300);
+ f.setLayout(null);
+ f.setTitle("MouseEvent");
+ f.setVisible(true);
+ init();
+ add_component();
+ }
+ public void init()
+ {
+ b= new Button("close");
+ tf= new TextField(40);
+ tf.setBounds(30,30,150,40);
+ }
+ public void add_component()
+ {
+ f.add(tf);
+ b.setBounds(200,200,50,50);
+ f.add(b);
+ f.addWindowListener(this);
+ f.addMouseListener(this);
+ b.addActionListener(this);
+ }
+ public void windowClosing(WindowEvent e)
+ {
+ f.dispose();
+ }
+ public void mouseEntered(MouseEvent e)
+ {
+ tf.setText("mouse entered");
+ f.setBackground(Color.RED);
+ }
+ public void mouseExited(MouseEvent e)
+ {
+ tf.setText("mouse Exited");
+ f.setBackground(Color.WHITE);
+ }
+ public void mouseClicked(MouseEvent e)
+ {
+ tf.setText("mouse clicked");
+ f.setBackground(Color.YELLOW);
+ }
+ public void mousePressed(MouseEvent e)
+ {
+ tf.setText("mouse pressed");
+ f.setBackground(Color.GREEN);
+ }
+ public void mouseReleased(MouseEvent e)
+ {
+ tf.setText("mouse released");
+ f.setBackground(Color.BLUE);
+ }
+ public void actionPerformed(ActionEvent e)
+ {
+ f.dispose();
+ }
+}
+public class DemoTwo {
+public static void main(String args[])
+{
+new Mouse_Listener();
+}
+}
+
+package Test;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+class StudentExam extends WindowAdapter implements ActionListener {
+JFrame f;
+JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10;
+JComboBox<String> c1, c2;
+JTextField t1, t2, t3, t4, t5, t6, t7;
+JButton b1, b2;
+StudentExam(){
+init();
+f.setVisible(true);
+f.setSize(700, 600);
+f.setLayout(null);
+f.setTitle("StudentExam Calculation");
+location();
+addComponents();
+}
+public void init() {
+f = new JFrame();
+f.getContentPane();
+l1 = new JLabel("Name: ");
+l2 = new JLabel("Roll No.: ");
+l3 = new JLabel("Seat No.: ");
+l4 = new JLabel("Division: ");
+l5 = new JLabel("Department: ");
+l6 = new JLabel("Enter the marks obtained out of 100 : ");
+l7 = new JLabel("Maths");
+l8 = new JLabel("Physics");
+l9 = new JLabel("Chemistry");
+l10 = new JLabel("English");
+t1 = new JTextField();
+t2 = new JTextField();
+t3 = new JTextField();
+t4 = new JTextField();
+t5 = new JTextField();
+t6 = new JTextField();
+t7 = new JTextField();
+c1 = new JComboBox<>();
+c2 = new JComboBox<>();
+b1 = new JButton("Calculate");
+b1.setBackground(new Color(200, 170, 190).brighter());
+b2 = new JButton("Reset");
+b2.setBackground(new Color(200, 170, 190).brighter());
+}
+public void addComponents() {
+f.addWindowListener(this);
+f.add(l1);
+f.add(l2);
+f.add(l3);
+f.add(t1);
+f.add(t2);
+f.add(t3);
+f.add(l4);
+f.add(l5);
+f.add(l6);
+f.add(c1);
+f.add(c2);
+c1.setSelectedIndex(-1);
+c2.setSelectedIndex(-1);
+f.add(l7);
+f.add(l8);
+f.add(l9);
+f.add(l10);
+f.add(t4);
+f.add(t5);
+f.add(t6);
+f.add(t7);
+f.add(b1);
+f.add(b2);
+b1.addActionListener(this);
+b2.addActionListener(this);
+}
+public void location() {
+l1.setBounds(50, 40, 70, 30);
+l1.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+l2.setBounds(50, 90, 70, 30);
+l2.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+l3.setBounds(50, 140, 70, 30);
+l3.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+t1.setBounds(120, 40, 200, 30);
+t2.setBounds(120, 90, 200, 30);
+t3.setBounds(120, 140, 200, 30);
+l4.setBounds(400, 40, 70, 30);
+l4.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+l5.setBounds(400, 90, 90, 30);
+l5.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+l6.setBounds(200, 200, 250, 30);
+l6.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+c1.setBounds(500, 40, 90, 30);
+c1.addItem("TE V");
+c1.addItem("TE VI");
+c1.addItem("TE VII");
+c1.addItem("TE VIII");
+c2.setBounds(500, 90, 90, 30);
+c2.addItem("E&TC");
+c2.addItem("CS");
+c2.addItem("IT");
+l7.setBounds(90, 250, 70, 30);
+l7.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+l8.setBounds(90, 310, 70, 30);
+l8.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+l9.setBounds(400, 250, 70, 30);
+l9.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+l10.setBounds(400, 310, 70, 30);
+l10.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+t4.setBounds(160, 250, 100, 30);
+t5.setBounds(160, 310, 100, 30);
+t6.setBounds(470, 250, 100, 30);
+t7.setBounds(470, 310, 100, 30);
+b1.setBounds(160, 400, 100, 30);
+b2.setBounds(400, 400, 100, 30);
+}
+public void windowClosing(WindowEvent e) {
+f.dispose();
+}
+public void actionPerformed(ActionEvent e) {
+if(e.getSource()==b1) {
+if(t1.getText().isEmpty() || t2.getText().isEmpty() || t3.getText().isEmpty() ||
+t4.getText().isEmpty() || t5.getText().isEmpty() || t6.getText().isEmpty() || t7.getText().isEmpty() ||
+c1.getSelectedIndex()==-1 || c2.getSelectedIndex()==-1) {
+JOptionPane.showMessageDialog(f, "Invalid Input \nOne or more
+input fields empty!");
+}
+else {
+int a = Integer.parseInt(t4.getText());
+int b = Integer.parseInt(t5.getText());
+int c = Integer.parseInt(t6.getText());
+int d = Integer.parseInt(t7.getText());
+int percentage = ((a+b+c+d) * 100)/400;
+f.dispose();
+JOptionPane.showMessageDialog(f, "Name: "+t1.getText()+"\nRoll
+No.:"+t2.getText()+"\nSeatNo.:"+t3.getText()+"\nDivision:"+c1.getSelectedItem()+"\nDepartment:"+c
+2.getSelectedItem()+"\nResult: "+percentage+"%");
+}
+}
+else {
+t1.setText("");
+t2.setText("");
+t3.setText("");
+t4.setText("");
+t5.setText("");
+t6.setText("");
+t7.setText("");
+c1.setSelectedIndex(-1);
+c2.setSelectedIndex(-1);
+}
+}
+}
+public class DemoThree {
+public static void main(String args[])
+{
+new StudentExam();
+}
+}
+
+package Test;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+public class AlternateFour {
+ public static void main(String args[]) throws SQLException {
+ String url = "jdbc:mysql://localhost:3306/TestDB"; // No specific database mentioned as we're
+creating a new database
+ String username = "root";
+ String password = "manish@18";
+ Connection con = DriverManager.getConnection(url, username, password);
+ Statement st = con.createStatement();
+ String createTableSQL = "CREATE TABLE IF NOT EXISTS studentTT ("
+ + "name VARCHAR(100), "
+ + "roll_number INT, "
+ + "course VARCHAR(100), "
+ + "marks INT"
+ + ")";
+
+ // Execute the SQL command to create the database
+ st.executeUpdate(createTableSQL);
+ System.out.println("studentTT created successfully!");
+
+ String insertRowSQL = "INSERT INTO studentTT (name, roll_number, course, marks) VALUES
+('Manish', 42343, 'Advance Java Programming', 99)";
+ st.executeUpdate(insertRowSQL);
+ System.out.println("Row inserted successfully!");
+
+ // Execute a SELECT query to fetch data from the 'student_info' table
+ String selectQuery = "SELECT name, roll_number, course, marks FROM studentTT";
+ ResultSet rs = st.executeQuery(selectQuery);
+ // Display the fetched data using ResultSet
+ while (rs.next()) {
+ String name = rs.getString("name");
+ int rollNumber = rs.getInt("roll_number");
+ String course = rs.getString("course");
+ int marks = rs.getInt("marks");
+ System.out.println("Name: " + name + ", Roll Number: " + rollNumber + ", Course: " + course +
+", Marks: " + marks);
+ }
+ /* To delete a record
+ String deleteQuery = "DELETE FROM student_info WHERE name = 'Manish'";
+ // Execute the delete query to remove the identified record
+ st.executeUpdate(deleteQuery); */
+
+ con.close();
+ }
+}
+
+Create separate package and delete module.info file for all RMI experiments.
+1.) Client.java
+package random;
+import java.rmi.Naming;
+import java.rmi.*;
+public class Client {
+public static void main(String[] args) throws Exception
+{
+palinI obj=(palinI)
+Naming.lookup("rmi://localhost:16000/PALLINDROME"); //Naming.lookup is used to
+find the remote object by its URL. It tries to locate the object using RMI registry on the local machine
+at port 16000 with the name "PALLINDROME".
+obj.pallindromecheck(); // This line invokes the method pallindromecheck() on the
+remote object obtained from the RMI registry.
+}
+}
+2.) Server.java
+package random;
+import java.rmi.*;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+public class Server
+{
+public static void main(String args[]) throws RemoteException, AlreadyBoundException
+{
+Registry registry=LocateRegistry.createRegistry(16000);
+palinC obj=new palinC();
+registry.bind("PALLINDROME", obj);
+System.out.println("Server Started");
+}
+}
+3.) PalinC.java
+package random;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.*;
+public class palinC extends UnicastRemoteObject implements palinI {
+protected palinC() throws RemoteException {
+super();
+}
+public void pallindromecheck() throws RemoteException
+{
+Scanner sc = new Scanner(System.in);
+String s;
+System.out.println("Enter the String");
+s=sc.next();
+int n=s.length();
+int flag=0;
+for(int i=0;i<n/2;i++)
+{
+if(s.charAt(i)!=s.charAt(n-i-1))
+{
+flag=1;
+break;
+}
+}
+if(flag==1)
+{
+System.out.println("Not a Palindrome");
+}
+else
+{
+System.out.println("Given string is a Palindrome");
+}
+}
+}
+4.) PalinI.java
+package random;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.Remote;
+public interface palinI extends Remote{
+public void pallindromecheck()throws RemoteException;
+}
+
+package Test;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+public class DemoSix {
+public static void main(String[] args) throws UnknownHostException {
+// 1) public static InetAddress getLocalHost() throws UnknownHostException
+InetAddress ip1 = InetAddress.getLocalHost();
+System.out.println("1. Address of local host:=" + ip1);
+// 2) public static InetAddress getByName() throws UnknownHostException
+InetAddress ip2 = InetAddress.getByName("www.pict.edu");
+System.out.println("2. Address of string host:=" + ip2);
+// 3) public static InetAddress getByAddress(byte[] address) throws
+UnknownHostException
+byte[] ipaddress = {10, 10, 12, 80};
+InetAddress ip3 = InetAddress.getByAddress(ipaddress);
+System.out.println("3. Host name for ip address:=" + ip3);
+// 4) public static InetAddress [] getAllByName(String host) throws
+UnknownHostException
+InetAddress[] ip4 = InetAddress.getAllByName("www.pict.edu");
+for (InetAddress inetAddress : ip4)
+{
+System.out.println("4. address of url=" + inetAddress);
+}
+// 5) public static InetAddress getByAddress(String host,byte []address)throws
+// UnknownHostException
+InetAddress ip5 = InetAddress.getByAddress("pict.edu", ipaddress);
+System.out.println("5. Inetaddress of host with ip address and hostname=" +ip5);
+//Instance Method
+System.out.println("6. Host name of inetaddress=" + ip2.getHostName());
+System.out.println("7. Address of host hold by inetaddress object=" +
+ip2.getHostAddress());
+System.out.println("8. Address equals or not=" + ip2.equals(ip1));
+System.out.println("9. to sting convert="+ ip2);
+System.out.println("10. it is multicast address : "+ip2.isMulticastAddress());
+}
+}
+
+1.) Index.html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Page</title>
+</head>
+<body>
+<form action="LoginServlet" >
+Enter User ID<input type="text" name="USERNAME"><br>
+Enter Password<input type="password" name="PASSWORD"><br>
+<input type="reset">
+<input type="submit" value=" LOGIN ">
+</form>
+</body>
+</html>
+2.) Success.html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+Welcome<br>
+Login successful
+</body>
+</html>
+3.) LoginServlet.java
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.io.PrintWriter;
+public class LoginServlet extends HttpServlet {
+private static final long serialVersionUID = 1L;
+public LoginServlet() {
+super();
+}
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
+ServletException, IOException {
+// TODO Auto-generated method stub
+PrintWriter out = response.getWriter();
+out.println("<html><head><title>Servlet LoginServlet</title></head>");
+String uname = request.getParameter("USERNAME");
+String upass = request.getParameter("PASSWORD");
+if(uname.equals("Root") &&upass.equals("abc@123"))
+{
+response.sendRedirect("Success.html");
+}
+else
+{
+out.println("<body bgcolor=violet >");
+out.println("<h1> LOGIN FAILED! </h1>");
+out.println("<font color=red size=12>Incorrect User Name or Password....Try
+Again!</font>");
+RequestDispatcher rd = request.getRequestDispatcher("index.html");
+rd.include(request, response);
+}
+out.println("</body></html>");
+}
+}
+4.) Web.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee"
+xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd http://xmlns.jcp.org/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="5.0">
+<display-name>Exp7</display-name>
+<welcome-file-list>
+<welcome-file>index.html</welcome-file>
+<welcome-file>index.jsp</welcome-file>
+<welcome-file>index.htm</welcome-file>
+<welcome-file>default.html</welcome-file>
+<welcome-file>default.jsp</welcome-file>
+<welcome-file>default.htm</welcome-file>
+</welcome-file-list>
+<servlet>
+<description></description>
+<display-name>LoginServlet</display-name>
+<servlet-name>LoginServlet</servlet-name>
+<servlet-class>mypack.LoginServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>LoginServlet</servlet-name>
+<url-pattern>/LoginServlet</url-pattern>
+</servlet-mapping>
+</web-app>
+
+1.) PrintI.java
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+public interface PrintI extends Remote
+{
+public void printmsg() throws RemoteException;
+public void checkPass() throws RemoteException;
+}
+2.) PrintC.java
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.*;
+public class PrintC extends UnicastRemoteObject implements PrintI {
+Scanner sc=new Scanner(System.in);
+public PrintC() throws RemoteException {
+super();
+}
+public void checkPass() throws RemoteException {
+String pass;
+String ref="123";
+System.out.println("Enter the password");
+pass=sc.next();
+if(pass.equals(ref))
+{
+System.out.println("Welcome");
+}
+else
+{
+System.out.println("Please Enter valid password");
+}
+}
+public void printmsg() throws RemoteException
+{
+System.out.println("Hello Students");
+}
+}
+3.) Server.java
+import java.rmi.*;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+public class Server {
+public static void main(String[] args) throws Exception
+{
+Registry registry=LocateRegistry.createRegistry(7000);
+PrintC obj1=new PrintC();
+registry.bind("SHOWMSG", obj1);
+System.out.println("Server Started");
+}
+}
+4.) Client.java
+import java.rmi.Naming;
+import java.rmi.*;
+public class Client {
+public static void main(String[] args) throws Exception {
+PrintI obj1=(PrintI) Naming.lookup("rmi://localhost:7000/SHOWMSG");
+obj1.checkPass();
+obj1.printmsg();
+}
+}
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>JSP</title>
+</head>
+<body>
+<center>
+<h2>This is my first JSP program</h2>
+<font size = "3" face = "Verdana" color = "red"><i>Hello</i></font>
+</center>
+</body>
+</html>
+
+Index.html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<center>
+<form method = get action = findCalc>
+1.) Enter the number 1:- <input type = text name = t1><br></br>
+2.) Enter the number 2:- <input type = text name = t2><br></br>
+<h3>"Choose one option from below"</h3>
+<input type = submit name = btn value="+">
+<input type = submit name = btn value="-">
+<input type = submit name = btn value="*">
+<input type = submit name = btn value="/">
+</form>
+</center>
+</body>
+</html>
+Calculator.java
+package Perform;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+@WebServlet("/findCalc")
+public class Calculator extends HttpServlet {
+private static final long serialVersionUID = 1L;
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
+ServletException, IOException
+{
+response.setContentType("text/html");
+PrintWriter out = null;
+try
+{
+out = response.getWriter();
+out.println("<center>");
+int a = Integer.parseInt(request.getParameter("t1"));
+int b = Integer.parseInt(request.getParameter("t2"));
+int c = 0;
+String op = request.getParameter("btn");
+if (op.equals("+")) c = a+b;
+if (op.equals("-")) c = a-b;
+if (op.equals("*")) c = a*b;
+if (op.equals("/")) c = a/b;
+out.println("<h3>The result obtained is:-</h3>");
+out.println("<h3>"+a+" "+op+" "+b+" = "+c+"</h3");
+}
+catch (Exception e)
+{
+out.println("Error is: "+e.getMessage());
+}
+finally
+{
+out.println("<br>");
+out.println("To Goto main page <a href = index.html> Click Here </a>");
+out.println("</center>");
+}
+}
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
+ServletException, IOException
+{
+doGet(request, response);
+}
+}
