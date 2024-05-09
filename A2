@@ -1,0 +1,91 @@
+package com.Expriment;
+
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.TextField;
+import java.awt.event.*;
+
+// Class implementing MouseListener, ActionListener and extending WindowAdapter
+class Mouse_Listener extends WindowAdapter implements MouseListener, ActionListener {
+    Frame f;
+    TextField tf;
+    Button b;
+
+    // Constructor
+    Mouse_Listener() {
+        f = new Frame();
+        f.setSize(300, 300);
+        f.setLayout(null);
+        f.setTitle("MouseEvent");
+        f.setVisible(true);
+        init();
+        addComponents();
+    }
+
+    // Method to initialize components
+    public void init() {
+        b = new Button("close");
+        tf = new TextField(40);
+        tf.setBounds(30, 30, 150, 40);
+    }
+
+    // Method to add components to the frame
+    public void addComponents() {
+        f.add(tf);
+        b.setBounds(200, 200, 50, 50);
+        f.add(b);
+
+        f.addWindowListener(this);
+        f.addMouseListener(this);
+        b.addActionListener(this);
+    }
+
+    // Method to handle window closing event
+    public void windowClosing(WindowEvent e) {
+        f.dispose();
+    }
+
+    // Method to handle mouse entered event
+    public void mouseEntered(MouseEvent e) {
+        tf.setText("mouse entered");
+        f.setBackground(Color.RED);
+    }
+
+    // Method to handle mouse exited event
+    public void mouseExited(MouseEvent e) {
+        tf.setText("mouse Exited");
+        f.setBackground(Color.WHITE);
+    }
+
+    // Method to handle mouse clicked event
+    public void mouseClicked(MouseEvent e) {
+        tf.setText("mouse clicked");
+        f.setBackground(Color.YELLOW);
+    }
+
+    // Method to handle mouse pressed event
+    public void mousePressed(MouseEvent e) {
+        tf.setText("mouse pressed");
+        f.setBackground(Color.GREEN);
+    }
+
+    // Method to handle mouse released event
+    public void mouseReleased(MouseEvent e) {
+        tf.setText("mouse released");
+        f.setBackground(Color.BLUE);
+    }
+
+    // Method to handle button click event
+    public void actionPerformed(ActionEvent e) {
+        f.dispose();
+    }
+}
+
+// Main class
+public class A2 {
+    // Main method
+    public static void main(String args[]) {
+        new Mouse_Listener(); // Create an instance of Mouse_Listener
+    }
+}
