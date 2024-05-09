@@ -1,0 +1,76 @@
+package com.Experiment;
+
+import java.awt.*;
+import java.awt.event.*;
+
+// Class implementing KeyListener and extending WindowAdapter
+class KeyListener_Example extends WindowAdapter implements KeyListener {
+    Label l; // Label to display key events
+    TextArea a; // TextArea to capture key events
+    Frame f; // Frame to contain components
+
+    // Constructor
+    KeyListener_Example() {
+        // Initialize frame
+        f = new Frame();
+        f.setSize(400, 400);
+        f.setVisible(true);
+        f.setLayout(null);
+        f.setTitle("KeyListener_Example");
+
+        // Initialize components
+        init();
+
+        // Add components to the frame
+        addComponent();
+    }
+
+    // Method to initialize components
+    public void init() {
+        l = new Label();
+        a = new TextArea();
+    }
+
+    // Method to add components to the frame
+    public void addComponent() {
+        l.setBounds(20, 50, 100, 20); // Set bounds for label
+        f.add(l); // Add label to frame
+        a.setBounds(20, 80, 300, 300); // Set bounds for text area
+        f.add(a); // Add text area to frame
+        f.addWindowListener(this); // Add window listener to handle window events
+        a.addKeyListener(this); // Add key listener to text area to handle key events
+    }
+
+    // Method to handle window closing event
+    public void windowClosing(WindowEvent e) {
+        f.dispose(); // Dispose frame when window is closing
+    }
+
+    // Method to handle key pressed event
+    public void keyPressed(KeyEvent e) {
+        l.setText("KeyPressed"); // Update label to show key pressed event
+    }
+
+    // Method to handle key released event
+    public void keyReleased(KeyEvent e) {
+        l.setText("KeyReleased"); // Update label to show key released event
+    }
+
+    // Method to handle key typed event
+    public void keyTyped(KeyEvent e) {
+        l.setText("KeyTyped"); // Update label to show key typed event
+    }
+
+    // Main method to create an instance of KeyListener_Example
+    public static void main(String[] args) {
+        new KeyListener_Example();
+    }
+}
+
+// Another class with main method
+public class A1 {
+    // Main method
+    public static void main(String[] args) {
+        new KeyListener_Example(); // Create an instance of KeyListener_Example
+    }
+}
