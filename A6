@@ -1,0 +1,28 @@
+package com.Experiment;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class A6 {
+
+    public static void main(String[] args) throws UnknownHostException {
+        // Get the local host address
+        InetAddress ip1 = InetAddress.getLocalHost();
+        System.out.println("ip1 : " + ip1);
+
+        // Get the IP address of a specified host
+        InetAddress ip2 = InetAddress.getByName("www.pict.edu");
+        System.out.println("ip2 : " + ip2);
+
+        // Get the IP address by specifying the byte array
+        byte[] ipaddress = {10, 10, 12, 80}; // Represents the IP address 10.10.12.80
+        InetAddress ip3 = InetAddress.getByAddress(ipaddress);
+        System.out.println("ip3 : " + ip3);
+
+        // Get all IP addresses associated with a given host name
+        InetAddress[] ip4 = InetAddress.getAllByName("www.pict.edu");
+        for (InetAddress inet : ip4) {
+            System.out.println("ip4 : " + inet);
+        }
+    }
+}
