@@ -1,0 +1,180 @@
+package com.Experiment;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.Scanner;
+import java.sql.*;
+
+public class A4 {
+    public static Scanner obj = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        try {
+            // Load the MySQL JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establish connection to the database
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/students", "root", "manish@18");
+            PreparedStatement st = null;
+            int c;
+
+            // Display menu and handle user's choice
+            do {
+                System.out.println("\n\n\n-----------------DB operations-------------");
+                System.out.println("1.Create Table");
+                System.out.println("2.Insert Student Data");
+                System.out.println("3.Update Student Data");
+                System.out.println("4.Delete Student Data");
+                System.out.println("5.Search Student Data");
+                System.out.println("6.Display Student Data");
+                System.out.println("7.EXIT");
+                System.out.println("Enter the choice : ");
+                c = obj.nextInt();
+
+                switch (c) {
+                    case 1:
+                        create(st, con);
+                        break;
+                    case 2:
+                        Insert(st, con);
+                        break;
+                    case 3:
+                        Update(st, con);
+                        break;
+                    case 4:
+                        Delete(st, con);
+                        break;
+                    case 5:
+                        Search(st, con);
+                        break;
+                    case 6:
+                        Display(st, con);
+                        break;
+                    case 7:
+                        System.out.println("Program Ended successfully");
+                        break;
+                }
+            } while (c != 7);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    // Method to create a new table in the database
+    public static void create(PreparedStatement st, Connection con) {
+        try {
+            // Execute SQL query to create table
+            st = con.prepareStatement("create table studento( roll INT NOT NULL,name VARCHAR(255),marks INT)");
+            st.executeUpdate();
+            System.out.println("Table created successfully :");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    // Method to insert new student data into the table
+    public static void Insert(PreparedStatement st, Connection con) {
+        int roll, marks;
+        String name;
+        System.out.println("Enter Roll Number: ");
+        roll = obj.nextInt();
+        System.out.println("Enter name : ");
+        name = obj.next();
+        System.out.println("Enter marks : ");
+        marks = obj.nextInt();
+        try {
+            // Execute SQL query to insert data
+            st = con.prepareStatement("insert into studento values(?,?,?)");
+            st.setInt(1, roll);
+            st.setString(2, name);
+            st.setInt(3, marks);
+            st.executeUpdate();
+            System.out.println("Inserted values successfully :");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    // Method to update student data in the table
+    public static void Update(PreparedStatement st, Connection con) {
+        int r, m;
+        System.out.println("Enter Roll Number: ");
+        r = obj.nextInt();
+
+        System.out.println("Enter marks : ");
+        m = obj.nextInt();
+
+        try {
+            // Execute SQL query to update data
+            st = con.prepareStatement("update studento set marks=? where roll=?");
+            st.setInt(1, m);
+            st.setInt(2, r);
+            st.executeUpdate();
+            System.out.println("Updated values successfully :");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    // Method to delete student data from the table
+    public static void Delete(PreparedStatement st, Connection con) {
+        int r;
+        System.out.println("Enter Roll Number: ");
+        r = obj.nextInt();
+
+        try {
+            // Execute SQL query to delete data
+            st = con.prepareStatement("delete from studento where roll=?");
+            st.setInt(1, r);
+            st.executeUpdate();
+            System.out.println("Deleted values successfully :");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    // Method to search for student data in the table
+    public static void Search(PreparedStatement st, Connection con) {
+        int r;
+        System.out.println("Enter Roll Number: ");
+        r = obj.nextInt();
+
+        try {
+            // Execute SQL query to search for data
+            st = con.prepareStatement("select * from studento where roll=?");
+            st.setInt(1, r);
+            ResultSet rs = st.executeQuery();
+
+            // Display search results
+            System.out.println("Rollno\t\t Name\t\t Marks\t\t");
+            while (rs.next()) {
+                System.out.println(rs.getInt(1) + "\t\t" + rs.getString(2) + "\t\t" + rs.getInt(3));
+            }
+            System.out.println("Searched values successfully :");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    // Method to display all student data from the table
+    public static void Display(PreparedStatement st, Connection con) {
+
+        try {
+            // Execute SQL query to retrieve all data
+            st = con.prepareStatement("select * from studento");
+            ResultSet rs = st.executeQuery();
+
+            // Display all data
+            System.out.println("Rollno\t\t Name\t\t Marks\t\t");
+            while (rs.next()) {
+                System.out.println(rs.getInt(1) + "\t\t" + rs.getString(2) + "\t\t" + rs.getInt(3));
+            }
+            System.out.println("Displayed values successfully :");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
