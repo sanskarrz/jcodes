@@ -1,0 +1,131 @@
+package com.Experiment;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
+public class A3 implements ActionListener {
+    JFrame f;
+    JLabel name, roll, physics, chemistry, math, dept, div;
+    JTextField name1, roll1, physics1, chemistry1, math1;
+    JButton b;
+    JComboBox dept1, div1;
+
+    // Constructor
+    A3() {
+        f = new JFrame();
+        f.setSize(1600, 1800);
+        f.setLayout(null);
+        f.setVisible(true);
+        init();
+        addComponent();
+    }
+
+    // Initialize GUI components
+    void init() {
+        // Labels and TextFields for student information
+        name = new JLabel("Name : ");
+        name.setBounds(25, 25, 100, 25);
+        name1 = new JTextField();
+        name1.setBounds(100, 25, 250, 25);
+
+        roll = new JLabel("Roll : ");
+        roll.setBounds(25, 60, 100, 25);
+        roll1 = new JTextField();
+        roll1.setBounds(100, 60, 250, 25);
+
+        physics = new JLabel("Physics : ");
+        physics.setBounds(25, 200, 100, 25);
+        physics1 = new JTextField();
+        physics1.setBounds(100, 200, 250, 25);
+
+        chemistry = new JLabel("Chemistry : ");
+        chemistry.setBounds(25, 240, 100, 25);
+        chemistry1 = new JTextField();
+        chemistry1.setBounds(100, 240, 250, 25);
+
+        math = new JLabel("Math : ");
+        math.setBounds(25, 280, 100, 25);
+        math1 = new JTextField();
+        math1.setBounds(100, 280, 250, 25);
+
+        // Labels and ComboBoxes for department and division selection
+        dept = new JLabel("Dept : ");
+        div = new JLabel("Div : ");
+        String dept_list[] = {"CS", "IT", "ENTC"};
+        String div_list[] = {"1", "2", "3", "4"};
+        dept1 = new JComboBox(dept_list);
+        div1 = new JComboBox(div_list);
+        dept.setBounds(25, 100, 100, 25);
+        dept1.setBounds(100, 100, 150, 25);
+        div.setBounds(25, 150, 100, 25);
+        div1.setBounds(100, 150, 150, 25);
+
+        // Submit button
+        b = new JButton("Submit");
+        b.setBounds(120, 320, 200, 50);
+    }
+
+    // Add components to the frame
+    void addComponent() {
+        f.add(name);
+        f.add(name1);
+        f.add(roll);
+        f.add(roll1);
+        f.add(physics);
+        f.add(physics1);
+        f.add(chemistry);
+        f.add(chemistry1);
+        f.add(math);
+        f.add(math1);
+        f.add(dept);
+        f.add(dept1);
+        f.add(div);
+        f.add(div1);
+        f.add(b);
+        // Add action listeners
+        dept1.addActionListener(this);
+        b.addActionListener(this);
+    }
+
+    // Action event handling
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b) {
+            // Process and display student information
+            f.setVisible(false);
+            float percentage = 0;
+            int p = Integer.parseInt(physics1.getText());
+            int c = Integer.parseInt(chemistry1.getText());
+            int m = Integer.parseInt(math1.getText());
+            int res = p + c + m;
+            percentage = res * 100 / 300;
+            JOptionPane.showMessageDialog(f, "Name : " + name1.getText() + "\n" + "Roll : " + roll1.getText() + "\n" +
+                    "Physics : " + physics1.getText() + "\n" + "Chemistry : " + chemistry1.getText() + "\n" +
+                    "Math : " + math1.getText() + "\n" + "Dept : " + dept1.getSelectedItem() + "\n" +
+                    "Div : " + div1.getSelectedItem() + "\n" + "Percentage : " + percentage);
+            f.dispose();
+        } else {
+            // Update division list based on department selection
+            int s = dept1.getSelectedIndex();
+            div1.removeAllItems();
+            if (s == 0) {
+                for (int i = 1; i < 5; i++) {
+                    div1.addItem(i);
+                }
+            } else if (s == 1) {
+                for (int i = 9; i < 13; i++) {
+                    div1.addItem(i);
+                }
+            } else {
+                for (int i = 5; i < 9; i++) {
+                    div1.addItem(i);
+                }
+            }
+        }
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        new A3();
+    }
+}
