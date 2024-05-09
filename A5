@@ -1,0 +1,130 @@
+// server.java
+package com.Experiment;
+
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class server {
+
+    public static void main(String[] args) throws RemoteException, AlreadyBoundException {
+        // Create a registry on port 2000
+        Registry rg = LocateRegistry.createRegistry(2000);
+        // Create an instance of palinC class
+        palinC pc = new palinC();
+        // Bind the palinC instance to the registry with the name "start"
+        rg.bind("start", pc);
+        System.out.println("Server started");
+    }
+}
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// client.java
+package com.Experiment;
+
+import java.net.MalformedURLException;
+import java.rmi.AlreadyBoundException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class client {
+
+    public static void main(String[] args) throws RemoteException, MalformedURLException, NotBoundException {
+        // Look up the remote object using the RMI registry on localhost and port 2000
+        palinI pi = (palinI)Naming.lookup("rmi://localhost:2000/start");
+        // Call the print method on the remote object
+        pi.print();
+    }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+client.java
+
+package com.Expriment;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.Scanner;
+
+public class palinC extends UnicastRemoteObject implements palinI {
+
+	public palinC() throws RemoteException {
+		super();
+		
+	}
+
+	@Override
+	public void print() throws RemoteException {
+		System.out.println("hello");
+		String s;
+		Scanner obj = new Scanner(System.in);
+		System.out.println("Enter a string");
+		s = obj.next();
+		StringBuffer s1 = new StringBuffer();
+		StringBuffer s2 = new StringBuffer();
+		s1.append(s);
+		s2.append(s);
+		s1 = s1.reverse();
+		System.out.println(s1);
+		if(s1.compareTo(s2)==0) {
+			System.out.println("The string is palindrome");
+		}
+		else {
+			System.out.println("The string is not palindrome");
+		}
+	}
+
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// palinI.java
+package com.Experiment;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface palinI extends Remote {
+    // Method signature for remote printing
+    public void print() throws RemoteException;
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// palinC.java
+package com.Experiment;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.Scanner;
+
+public class palinC extends UnicastRemoteObject implements palinI {
+
+    public palinC() throws RemoteException {
+        super();
+    }
+
+    @Override
+    public void print() throws RemoteException {
+        System.out.println("hello");
+        String s;
+        Scanner obj = new Scanner(System.in);
+        System.out.println("Enter a string");
+        s = obj.next();
+        StringBuffer s1 = new StringBuffer();
+        StringBuffer s2 = new StringBuffer();
+        s1.append(s);
+        s2.append(s);
+        s1 = s1.reverse();
+        System.out.println(s1);
+        if(s1.compareTo(s2)==0) {
+            System.out.println("The string is palindrome");
+        }
+        else {
+            System.out.println("The string is not palindrome");
+        }
+    }
+}
