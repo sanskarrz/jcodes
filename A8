@@ -1,0 +1,92 @@
+Server.java
+
+package com.Expriment;
+
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class Server {
+    public static void main(String[] args) throws Exception {
+        // Create a registry on port 7000
+        Registry registry = LocateRegistry.createRegistry(7000);
+        
+        // Create an instance of printC
+        PrintC obj1 = new PrintC();
+        
+        // Bind the object to the registry with the name "SHOWMSG"
+        registry.bind("SHOWMSG", obj1);
+        
+        // Print a message indicating that the server has started
+        System.out.println("Server Started");
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Client.java
+
+package com.Expriment;
+
+import java.rmi.Naming;
+
+public class Client {
+    public static void main(String[] args) throws Exception {
+        // Look up the object with the name "SHOWMSG" on localhost port 7000
+        PrintI obj1 = (PrintI) Naming.lookup("rmi://localhost:7000/SHOWMSG");
+        
+        // Call the methods defined in the PrintI interface
+        obj1.checkPass();
+        obj1.printmsg();
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PrintI.java 
+
+package com.Expriment;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface PrintI extends Remote {
+    // Method to print a message
+    public void printmsg() throws RemoteException;
+    
+    // Method to check password
+    public void checkPass() throws RemoteException;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PrintC.java
+
+package com.Expriment;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.Scanner;
+
+public class PrintC extends UnicastRemoteObject implements PrintI {
+    Scanner sc = new Scanner(System.in);
+
+    public PrintC() throws RemoteException {
+        super();
+    }
+
+    // Implementation of the checkPass method from PrintI interface
+    public void checkPass() throws RemoteException {
+        String pass;
+        String ref = "123";
+        
+        // Prompt the user to enter a password
+        System.out.println("Enter the password");
+        pass = sc.next();
+
+        // Check if the entered password matches the reference password
+        if (pass.equals(ref)) {
+            System.out.println("Welcome");
+        } else {
+            System.out.println("Please Enter a valid password");
+        }
+    }
+
+    // Implementation of the printmsg method from PrintI interface
+    public void printmsg() throws RemoteException {
+        System.out.println("Hello Students");
+    }
+}
