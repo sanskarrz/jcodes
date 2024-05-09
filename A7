@@ -1,0 +1,120 @@
+Inside src/main/java
+
+LoginServlet.java
+
+package com.Sample;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public LoginServlet() {
+        super();
+        // Constructor
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Method to handle GET requests
+        
+        // Create a PrintWriter object to send response back to the client
+        PrintWriter out = response.getWriter();
+
+        // Generate HTML response
+        out.println("<html><head><title>Servlet LoginServlet</title></head>");
+
+        // Retrieve username and password parameters from the request
+        String uname = request.getParameter("USERNAME");
+        String upass = request.getParameter("PASSWORD");
+
+        // Check if both username and password are provided and correct
+        if (uname != null && upass != null && uname.equals("Root") && upass.equals("abc@123")) {
+            // If username and password are correct, redirect to Success.html page
+            response.sendRedirect("Success.html");
+        } else {
+            // If username and password are incorrect or not provided, display error message
+            out.println("<body bgcolor=violet >");
+            out.println("<h1> LOGIN FAILED! </h1>");
+            out.println("<font color=red size=12>Incorrect User Name or Password....Try Again!</font>");
+
+            // Forward the request to Outer.html page for re-entering credentials
+            RequestDispatcher rd = request.getRequestDispatcher("Outer.html");
+            rd.include(request, response);
+        }
+
+        // Close HTML tags
+        out.println("</body></html>");				
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Outer.java
+
+package com.Sample;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+// Define the Servlet class
+public class Outer extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    
+    // Constructor
+    public Outer() {
+        super();
+    }
+
+    // Method to handle GET requests
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Write the response indicating that the servlet is served at the given context path
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Inside src/webapp
+
+outer.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Outer</title>
+</head>
+<body>
+    <center>
+        <form action="LoginServlet">
+            <table>
+                <tr><td>Enter User ID : <input type="text" name="USERNAME"></td></tr>
+                <tr><td>Enter Password : <input type="password" name="PASSWORD"></td></tr>
+            </table>        
+                <input type="reset"></td></tr>
+                <input type="submit" value="login"></td></tr>
+        </form>
+    </center>
+</body>
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+success.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	 Welcome, Login Successful!
+</body>
+</html>
